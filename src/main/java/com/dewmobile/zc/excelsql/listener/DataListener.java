@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.CollectionUtils;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Slf4j
 public class DataListener extends AnalysisEventListener<Map<Integer, String>> {
@@ -28,7 +29,7 @@ public class DataListener extends AnalysisEventListener<Map<Integer, String>> {
     @Override
     public void invokeHeadMap(Map<Integer, String> headMap, AnalysisContext context) {
         this.headMap = headMap;
-        List<String> fields = (List<String>) headMap.values();
+        List<String> fields = new ArrayList<>(headMap.values());
         if (CollectionUtils.isEmpty(fields)) {
             log.error("haven't read excel head");
         } else {
