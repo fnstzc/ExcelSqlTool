@@ -4,6 +4,7 @@ public interface SqlFactory {
     class Create {
         static final String INT = " `%s` INT(%s) %s";
         static final String VARCHAR = " `%s` VARCHAR(%s) %s";
+        static final String DROP = "DROP TABLE IF EXISTS `%s`";
         static final String SQL = "create table `%s` (`id` int unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT, %s) ENGINE=InnoDB DEFAULT CHARSET=utf8";
     }
 

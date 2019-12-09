@@ -7,6 +7,8 @@ import com.dewmobile.zc.excelsql.mapper.ExcelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.concurrent.Semaphore;
+
 @Component
 public class ExcelReader {
 
@@ -17,7 +19,6 @@ public class ExcelReader {
 
     public void readHeads() {
         String excelName = "city";
-        EasyExcel.read(fileName, new DataListener(excelName, excelDao)).headRowNumber(1).doReadAll();
+        EasyExcel.read(fileName, new DataListener(excelName, excelDao)).doReadAll();
     }
-
 }
