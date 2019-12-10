@@ -12,6 +12,8 @@ import java.util.stream.Collectors;
  */
 public class SqlOperator {
 
+    private static final String PRIMARY_KEY = "id";
+
     public static class Create implements SqlFactory {
         private static final String DEFAULT_NULL = "DEFAULT NULL";
         private static final String NOT_NULL = "NOT NULL";
@@ -24,8 +26,13 @@ public class SqlOperator {
         }
 
         private static String createSql(List<String> fields) {
-            StringBuffer sb = new StringBuffer();
-            fields.forEach(field -> sb.append(String.format(Create.VARCHAR, field, 200, DEFAULT_NULL)).append(","));
+            StringBuilder sb = new StringBuilder();
+            for (String field : fields) {
+                // 如果表中已有id字段则不重复创建
+                if (!PRIMARY_KEY.equals(field)) {
+                    sb.append(String.format(Create.VARCHAR, field, 200, DEFAULT_NULL)).append(",");
+                }
+            }
             String str = sb.toString();
             return str.substring(0, str.lastIndexOf(","));
         }

@@ -15,7 +15,7 @@ class ExcelsqlApplicationTests {
 
     @Test
     void contextLoads() {
-        excelReader.readToDb("/Users/zc/Documents/city.xlsx");
+        excelReader.readToDb("/Users/zc/Documents/operator.xlsx");
     }
 
 }
