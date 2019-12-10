@@ -11,7 +11,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 public class ExcelsqlApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ExcelsqlApplication.class, args);
+        ConfigurableApplicationContext context = SpringApplication.run(ExcelsqlApplication.class, args);
+        ExcelReader reader = context.getBean(ExcelReader.class);
+        reader.readToDb(args[0]);
     }
 
 }

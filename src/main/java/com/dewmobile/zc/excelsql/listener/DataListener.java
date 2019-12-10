@@ -18,11 +18,6 @@ public class DataListener extends AnalysisEventListener<Map<Integer, String>> {
 
     private ExcelDao excelDao;
 
-//    private ThreadPoolExecutor threadPool = new ThreadPoolExecutor(1, 1, 0L,
-//            TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>(10), new ThreadFactoryImpl("insertThread"));
-//
-//    private boolean firstInvoke = true;
-
     public DataListener(String excelName, ExcelDao excelDao) {
         this.excelName = excelName;
         this.excelDao = excelDao;
@@ -49,8 +44,8 @@ public class DataListener extends AnalysisEventListener<Map<Integer, String>> {
 
     @Override
     public void doAfterAllAnalysed(AnalysisContext analysisContext) {
-        System.out.println("read over");
         doInsert();
+        log.debug("resolve over");
     }
 
     private void doInsert() {
@@ -61,25 +56,4 @@ public class DataListener extends AnalysisEventListener<Map<Integer, String>> {
     private void clearCache() {
         dataCache.clear();
     }
-
-//    /**
-//     * invoke为每行数据回调一次，监测数据增长的变化情况
-//     */
-//    private class InsertThread extends Thread {
-//        @Override
-//        public void run() {
-//            try {
-//                do {
-//                    int beginSize = dataCache.size();
-//                    Thread.sleep(500);
-//                    if (dataCache.size() == beginSize) {
-//                        doInsert();
-//                        break;
-//                    }
-//                } while (dataCache.size() > 0);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
 }

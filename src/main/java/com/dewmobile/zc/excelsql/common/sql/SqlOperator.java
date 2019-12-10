@@ -32,21 +32,17 @@ public class SqlOperator {
     }
 
     public static class Insert implements SqlFactory {
-        private static final String DEFAULT_NULL = "DEFAULT NULL";
-        private static final String NOT_NULL = "NOT NULL";
-
         public static String insertSql(String tableName, List<String> fields,  List<List<String>> dataCache) {
             String fieldSql = String.join(",", fields);
 
             StringBuilder dataLines = new StringBuilder();
             for (List<String> datas : dataCache) {
                 dataLines.append(" (");
-//                dataLines.append(String.join("','", data));
                 for (String data : datas) {
                     if (data == null) {
                         dataLines.append(data).append(",");
                     } else {
-                        dataLines.append("'").append(data).append("'").append(",");
+                        dataLines.append("\"").append(data).append("\"").append(",");
                     }
                 }
                 dataLines.deleteCharAt(dataLines.lastIndexOf(","));

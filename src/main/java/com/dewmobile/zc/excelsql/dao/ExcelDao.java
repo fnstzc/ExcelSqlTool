@@ -23,6 +23,7 @@ public class ExcelDao {
 
     public void insertData(String tableName, List<String> fields, List<List<String>> dataCollection) {
         String sql = SqlOperator.Insert.insertSql(tableName, fields, dataCollection);
+        log.info("sql: [{}]", sql);
         int completeCount = excelMapper.insertData(sql);
         log.info("success insert data count: [{}]", completeCount);
     }
